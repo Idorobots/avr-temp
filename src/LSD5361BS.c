@@ -17,13 +17,11 @@ static char ascii[128] = {
 };
 
 void LSD5361BS_init(void) {
-    DATA_PORT = 0x00;     // no pull-ups
-    _delay_us(10);
-    DATA_PORT_C = 0xff;      // all output
+    DATA_PORT = 0x00;
+    DATA_PORT_C = 0xff;
 
-    CONTROL_PORT = 0x00;     // no pullups
-    _delay_us(10);
-    CONTROL_PORT_C = OUT_MASK;  // NUM_SEGMENTS outputs
+    CONTROL_PORT &= ~OUT_MASK;
+    CONTROL_PORT_C |= OUT_MASK;
 }
 
 void LSD5361BS_displayLetter(char letter) {

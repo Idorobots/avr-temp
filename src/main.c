@@ -2,7 +2,6 @@
 #include <avr/wdt.h>
 #include <util/delay.h>
 
-#define NUM_SEGMENTS 3
 #define DATA_PORT PORTD
 #define DATA_PORT_C DDRD
 #define CONTROL_PORT PORTB

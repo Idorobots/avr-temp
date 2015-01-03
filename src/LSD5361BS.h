@@ -20,10 +20,7 @@
   #define CONTROL_PORT_C DDRB
 #endif
 
-#ifndef NUM_SEGMENTS
-  #define NUM_SEGMENTS 2
-#endif
-
+#define NUM_SEGMENTS 3
 #define OUT_MASK ((0x01 << NUM_SEGMENTS) - 1)
 #define DOT_PATTERN (0x01 << 4)
 

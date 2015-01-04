@@ -1,4 +1,4 @@
-#include "LSD5361BS.h"
+#include "LDS5361BS.h"
 
 static char ascii[128] = {
     // Whitespace
@@ -16,7 +16,7 @@ static char ascii[128] = {
     0xC7, 0xEE, 0x05, 0xAB, 0x0F, 0x6E, 0x6E, 0x6E, 0x67, 0x63, 0xCD, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-void LSD5361BS_init(void) {
+void LDS5361BS_init(void) {
     DATA_PORT = 0x00;
     DATA_PORT_C = 0xff;
 
@@ -24,31 +24,31 @@ void LSD5361BS_init(void) {
     CONTROL_PORT_C |= OUT_MASK;
 }
 
-void LSD5361BS_displayLetter(char letter) {
+void LDS5361BS_displayLetter(char letter) {
     DATA_PORT = ~letter;
 }
 
-void LSD5361BS_displayLetterDot(char letter) {
-    LSD5361BS_displayLetter(letter | DOT_PATTERN);
+void LDS5361BS_displayLetterDot(char letter) {
+    LDS5361BS_displayLetter(letter | DOT_PATTERN);
 }
 
-void LSD5361BS_switchSegment(uint8_t nth) {
+void LDS5361BS_switchSegment(uint8_t nth) {
     DATA_PORT = 0xFF;
     CONTROL_PORT &= ~OUT_MASK;
     CONTROL_PORT |= 0x01 << nth;
     _delay_us(10);
 }
 
-void LSD5361BS_displayDot(char *string, uint8_t dotPosition) {
+void LDS5361BS_displayDot(char *string, uint8_t dotPosition) {
     uint8_t i = 0;
 
     for(i = 0; i < NUM_SEGMENTS; ++i) {
-        LSD5361BS_switchSegment(i);
+        LDS5361BS_switchSegment(i);
 
         if(i == dotPosition) {
-            LSD5361BS_displayLetterDot(ascii[(uint8_t) string[i]]);
+            LDS5361BS_displayLetterDot(ascii[(uint8_t) string[i]]);
         } else {
-            LSD5361BS_displayLetter(ascii[(uint8_t) string[i]]);
+            LDS5361BS_displayLetter(ascii[(uint8_t) string[i]]);
         }
 
         if(i < NUM_SEGMENTS - 1) _delay_ms(1);
@@ -56,6 +56,6 @@ void LSD5361BS_displayDot(char *string, uint8_t dotPosition) {
     }
 }
 
-void LSD5361BS_display(char *string) {
-    LSD5361BS_displayDot(string, NUM_SEGMENTS);
+void LDS5361BS_display(char *string) {
+    LDS5361BS_displayDot(string, NUM_SEGMENTS);
 }

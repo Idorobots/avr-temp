@@ -6,7 +6,7 @@
 #define DATA_PORT_C DDRD
 #define CONTROL_PORT PORTB
 #define CONTROL_PORT_C DDRB
-#include "LSD5361BS.h"
+#include "LDS5361BS.h"
 
 #define TEMP_PORT PORTC
 #define TEMP_PORT_C DDRC
@@ -51,7 +51,7 @@ int formatNum(char *str, int num) {
 
 int main (void) {
     DS18B20_init();
-    LSD5361BS_init();
+    LDS5361BS_init();
 
     _delay_ms(10);
 
@@ -64,15 +64,15 @@ int main (void) {
     while (1) {
         wdt_reset();
 
-        LSD5361BS_displayDot(num, dotPos);
+        LDS5361BS_displayDot(num, dotPos);
         DS18B20_convert();
 
         while(!DS18B20_isReady()) {
-            LSD5361BS_displayDot(num, dotPos);
+            LDS5361BS_displayDot(num, dotPos);
             _delay_ms(1);
         }
 
-        LSD5361BS_displayDot(num, dotPos);
+        LDS5361BS_displayDot(num, dotPos);
         currTemp = DS18B20_readTemp();
         dotPos = formatNum(num, currTemp);
     }

@@ -5,7 +5,7 @@ FUSE_H  = 0xd9
 AVRDUDE = avrdude -c usbasp -p $(DEVICE)
 
 VPATH = src
-OBJECTS = main.o LSD5361BS.o DS18B20.o
+OBJECTS = main.o LDS5361BS.o DS18B20.o
 
 CFLAGS  = -I. -DDEBUG_LEVEL=0 -Wall -Os -DF_CPU=$(F_CPU) -mmcu=$(DEVICE)
 CC = avr-gcc 

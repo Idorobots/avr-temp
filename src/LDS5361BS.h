@@ -1,5 +1,5 @@
-#ifndef LSD5361BS_H
-#define LSD5361BS_H
+#ifndef LDS5361BS_H
+#define LDS5361BS_H
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -24,11 +24,11 @@
 #define OUT_MASK ((0x01 << NUM_SEGMENTS) - 1)
 #define DOT_PATTERN (0x01 << 4)
 
-void LSD5361BS_init(void);
-void LSD5361BS_displayLetter(char letter);
-void LSD5361BS_displayLetterDot(char letter);
-void LSD5361BS_switchSegment(uint8_t nth);
-void LSD5361BS_displayDot(char *string, uint8_t dotPosition);
-void LSD5361BS_display(char *string);
+void LDS5361BS_init(void);
+void LDS5361BS_displayLetter(char letter);
+void LDS5361BS_displayLetterDot(char letter);
+void LDS5361BS_switchSegment(uint8_t nth);
+void LDS5361BS_displayDot(char *string, uint8_t dotPosition);
+void LDS5361BS_display(char *string);
 
 #endif

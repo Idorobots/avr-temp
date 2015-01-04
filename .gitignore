@@ -1,3 +1,10 @@
+## Eagle stuff:
+*.b#*
+*.s#*
+*.pro
+*.job
+
+## AVR-GCC stuff:
 *.bin
 *.elf
 *.hex

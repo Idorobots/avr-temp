@@ -3,6 +3,7 @@
 *.s#*
 *.pro
 *.job
+*.epf
 
 ## AVR-GCC stuff:
 *.bin

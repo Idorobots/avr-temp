@@ -14,6 +14,7 @@
 #define TEMP_BIT 0x1
 #include "DS18B20.h"
 
+#define TEMP_DELAY 20 // Update measurement every 20 seconds.
 
 int formatNum(char *str, int num) {
     uint8_t i = 0;
@@ -56,11 +57,12 @@ int main (void) {
     _delay_ms(10);
 
     char num[10];
-    int currTemp = 0;
+    int currTemp = 0xDEAD;
     int dotPos = formatNum(num, currTemp);
+    int delay = 0;
+    int max_delay =  (TEMP_DELAY * 1000 / 3); // s to ms with offset for the display delay.
 
     wdt_enable(WDTO_2S);
-
     while (1) {
         wdt_reset();
 
@@ -75,6 +77,14 @@ int main (void) {
         LDS5361BS_displayDot(num, dotPos);
         currTemp = DS18B20_readTemp();
         dotPos = formatNum(num, currTemp);
+
+        delay = 0;
+
+        while(++delay < max_delay) {
+            wdt_reset();
+            LDS5361BS_displayDot(num, dotPos);
+            _delay_ms(1);
+        }
     }
 
     return 1;

@@ -22,6 +22,8 @@ help:
 
 hex: main.hex
 
+bin: main.bin
+
 program: flash fuse
 
 fuse:
@@ -33,7 +35,7 @@ flash: main.hex
 	$(AVRDUDE) -U flash:w:main.hex
 
 clean:
-	rm -f main.hex main.lst main.obj main.cof main.list main.map main.eep.hex main.elf main.s 
+	rm -f main.bin main.hex main.lst main.obj main.cof main.list main.map main.eep.hex main.elf main.s 
 	rm -f *.o
 
 .c.o:
@@ -45,6 +47,9 @@ main.elf: $(OBJECTS)
 main.hex: main.elf
 	avr-objcopy -j .text -j .data -O ihex main.elf main.hex
 	avr-size main.hex
+
+main.bin: main.elf
+	avr-objcopy -j .text -j .data -O binary main.elf main.bin
 
 disasm:	main.elf
 	avr-objdump -d main.elf
